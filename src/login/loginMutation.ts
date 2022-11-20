@@ -1,8 +1,8 @@
 import apiClient from '../api/client'
 
-interface AuthTokens {
-    accessToken: string
-    refreshToken: string
+export interface AuthTokens {
+    access_token: string
+    refresh_token: string
 }
 
 export async function login(username: string, password: string): Promise<AuthTokens> {
