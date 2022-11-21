@@ -9,14 +9,18 @@ import { Login } from '@/routes/Login';
 
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router-dom";
 import { ConfigProvider } from 'antd';
-
 import AppCss from '@/App.css';
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/login"></Navigate>
+  },
   {
     path: '/signup',
     element:  
@@ -44,7 +48,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         colorBgBase: '#848CFC',
         colorBgLayout: '#848CFC',
         autoInsertSpaceInButton: false, 
-      }
+      },
     }}>
       <RouterProvider router={router} />
     </ConfigProvider>
