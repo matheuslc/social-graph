@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement } from 'react'
 import { Row, Input, Form, Col, Typography, Button } from 'antd'
 import {
   useMutation,

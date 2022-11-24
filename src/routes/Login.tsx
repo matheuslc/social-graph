@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { createContext, ReactElement } from 'react'
 import { Row, Input, Form, Col, Typography, Button } from 'antd'
 import {
   useMutation,
@@ -8,7 +8,7 @@ import logo from '../assets/logo.png'
 import { login, AuthTokens } from '../login/loginMutation'
 import { localStorageHook } from '../localstorage/hook'
 
-type LoginProps = {
+type LoginFormValue = {
   username: string
   password: string
 }
@@ -22,14 +22,14 @@ export function Login(): ReactElement {
   }
 
   const mutation = useMutation({
-    mutationFn: (values: LoginProps) => {
+    mutationFn: (values: LoginFormValue) => {
       return login(values.username, values.password)
     },
     onSuccess: storeToken
   })
 
 
-  const onFinish = (values: LoginProps) => {
+  const onFinish = (values: LoginFormValue) => {
     mutation.mutate(values)
   }
 
