@@ -5,16 +5,17 @@ import { AuthTokens } from './loginMutation';
 
 export const AuthContext = createContext({} as AuthTokens)
 export function ProtectedRoute({ children }): JSX.Element {
-    const [token] = localStorageHook('access_token')
+    const [access_token] = localStorageHook('access_token')
+    const [refresh_token] = localStorageHook('refresh_token')
     
-    if (!token) {
+    if (!access_token || !refresh_token) {
         return <>
             <Navigate to={'/login'} />
         </>
     }
 
     return <>
-        <AuthContext.Provider value={{access_token: token, refresh_token: ''}}>
+        <AuthContext.Provider value={{access_token, refresh_token}}>
             {children}
         </AuthContext.Provider>
     </>;
