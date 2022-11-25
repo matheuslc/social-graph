@@ -5,6 +5,7 @@ import ButtonGroup from 'antd/es/button/button-group'
 import React, { ReactElement, useContext, useState } from 'react'
 import { AuthContext } from '../login/protectedRoute'
 import { createPost } from '../post/postMutation'
+import { Timeline } from '../post/timeline'
 
 const EDIT_TAB = 'edit'
 const PREVIEW_TAB = 'preview'
@@ -38,40 +39,44 @@ export function Home(): ReactElement {
         </Col>
 
         <Col span={12}>
-          <Tabs
-            defaultActiveKey={EDIT_TAB}
-            onChange={setTab}
-            items={[
-              {
-                key: EDIT_TAB,
-                label: 'Writing',
-                children: <MDEditor
-                  value={content}
-                  onChange={setContent}
-                  preview={EDIT_TAB}
-                  fullscreen={false}
-                  hideToolbar={true}
-                />
-              },
-              {
-                key: PREVIEW_TAB,
-                label: 'Preview',
-                children: <MDEditor.Markdown source={content} />
-              }
-            ]}
-          />
+          <Col span={24}>
+            <Tabs
+              defaultActiveKey={EDIT_TAB}
+              onChange={setTab}
+              items={[
+                {
+                  key: EDIT_TAB,
+                  label: 'Writing',
+                  children: <MDEditor
+                    value={content}
+                    onChange={setContent}
+                    preview={EDIT_TAB}
+                    fullscreen={false}
+                    hideToolbar={true}
+                  />
+                },
+                {
+                  key: PREVIEW_TAB,
+                  label: 'Preview',
+                  children: <MDEditor.Markdown source={content} />
+                }
+              ]}
+            />
 
-          <ButtonGroup>
-            <Button type="ghost" onClick={() => postMutation.mutate({ content })}>cancel</Button>
-            <Button type="primary" onClick={() => postMutation.mutate({ content })}>share to the world</Button>
-          </ButtonGroup>
+            <ButtonGroup>
+              <Button type="ghost" onClick={() => postMutation.mutate({ content })}>cancel</Button>
+              <Button type="primary" onClick={() => postMutation.mutate({ content })}>share to the world</Button>
+            </ButtonGroup>
+          </Col>
+
+          <Col span={24}>
+            <Timeline></Timeline>
+          </Col>
         </Col>
       </Row>
 
       <Row>
-        <Col span={24}>
-          FOOTER
-        </Col>
+
       </Row>
     </>
   )

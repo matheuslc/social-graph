@@ -7,6 +7,7 @@ import {
 import logo from '../assets/logo.png'
 import { login, AuthTokens } from '../login/loginMutation'
 import { localStorageHook } from '../localstorage/hook'
+import { useNavigate } from 'react-router-dom'
 
 type LoginFormValue = {
   username: string
@@ -14,11 +15,14 @@ type LoginFormValue = {
 }
 
 export function Login(): ReactElement {
+  const navigate = useNavigate()
   const [token, setToken] = localStorageHook('token')
 
   const storeToken = (data: AuthTokens) => {
     setToken('access_token', data.access_token)
     setToken('refresh_token', data.refresh_token)
+
+    navigate('/home')
   }
 
   const mutation = useMutation({
